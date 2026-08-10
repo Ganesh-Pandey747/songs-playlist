@@ -72,11 +72,15 @@ function loadYouTubeApi(): Promise<YouTubeApi> {
  * `nextVideo()` still does not reliably advance past a video that failed to
  * load, which strands the whole queue behind one un-embeddable upload. Holding
  * the index here and loading each video explicitly makes skipping deterministic.
+ *
+ * Each track change also replaces the player rather than reusing it — see
+ * `load` for why.
  */
 export class YouTubeBackend implements PlaybackBackend {
   private player: YouTubePlayer | null = null;
   private host: HTMLElement | null = null;
   private timer: number | null = null;
+  private swapTimer: number | null = null;
   private index = 0;
   private consecutiveSkips = 0;
   private volume = 0.8;
@@ -105,6 +109,8 @@ export class YouTubeBackend implements PlaybackBackend {
   }
 
   pause(): void {
+    // Also cancels a pending swap's autoplay, for a pause landing mid-change.
+    this.pendingPlay = false;
     this.player?.pauseVideo();
   }
 
@@ -158,6 +164,15 @@ export class YouTubeBackend implements PlaybackBackend {
 
   destroy(): void {
     this.destroyed = true;
+    if (this.swapTimer !== null) {
+      clearTimeout(this.swapTimer);
+      this.swapTimer = null;
+    }
+    this.teardownPlayer();
+  }
+
+  /** Drops the player and its iframe but leaves the backend able to mount again. */
+  private teardownPlayer(): void {
     this.stopPolling();
     this.player?.destroy();
     this.player = null;
@@ -170,18 +185,49 @@ export class YouTubeBackend implements PlaybackBackend {
     return count ? ((index % count) + count) % count : 0;
   }
 
+  /**
+   * Moves to `index` on a player built for it from scratch.
+   *
+   * Asking one long-lived player for video after video via `loadVideoById` is
+   * what earns a pre-roll: YouTube reads the repeat requests as one continuing
+   * watch session and advertises into it. A newly created player showing its
+   * initial video is not interrupted that way, so every track change gets its
+   * own player — the same thing that happens when the ad-free switch is flipped
+   * and flipped back, which is how the ads were found to disappear.
+   *
+   * The cost is a fresh iframe per change. The API script is already cached by
+   * then, so what remains is the player bootstrap.
+   */
   private load(index: number, autoplay: boolean): void {
     this.index = this.wrap(index);
     this.pendingPlay = autoplay;
     this.sink.setIndex(this.index);
     this.sink.setTime(0);
     this.sink.setDuration(0);
+    // The gap now covers a player bootstrap, so say so rather than sit on a
+    // stale "playing" with a frozen clock.
+    if (autoplay) this.sink.setBuffering(true);
 
-    const videoId = this.tracks[this.index]?.id;
-    if (!videoId || !this.player) return;
+    if (!this.tracks[this.index]?.id) return;
+    this.scheduleSwap();
+  }
 
-    if (autoplay) this.player.loadVideoById(videoId);
-    else this.player.cueVideoById(videoId);
+  /**
+   * Swaps in the new player on a later task.
+   *
+   * `load` runs from inside the player's own `onStateChange`/`onError` callbacks
+   * when a track ends or is skipped, and tearing a player down mid-callback is
+   * asking for trouble. Deferring also collapses a burst of skips into one mount
+   * instead of one per press.
+   */
+  private scheduleSwap(): void {
+    if (this.swapTimer !== null) clearTimeout(this.swapTimer);
+    this.swapTimer = window.setTimeout(() => {
+      this.swapTimer = null;
+      if (this.destroyed) return;
+      this.teardownPlayer();
+      void this.mount();
+    }, 0);
   }
 
   private async mount(): Promise<void> {
