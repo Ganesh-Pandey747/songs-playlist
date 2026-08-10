@@ -625,9 +625,10 @@
   </svg>
 
   <!-- ====================== EMRAAN — a rain-slicked city at night ====================== -->
+  <!-- Awarapan shares it: same singer, same after-dark mood, and no scene of its own. -->
   <svg
     class="scene"
-    [class.active]="scene() === 'emraan'"
+    [class.active]="scene() === 'emraan' || scene() === 'awarapan'"
     viewBox="0 0 1600 900"
     preserveAspectRatio="xMidYMid slice"
     role="img"

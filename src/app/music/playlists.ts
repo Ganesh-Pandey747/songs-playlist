@@ -18,7 +18,7 @@
 
 import { cleanTitle } from './clean-title';
 
-export type PlaylistId = 'safar' | 'bus-drive' | 'saloon' | 'emraan';
+export type PlaylistId = 'safar' | 'bus-drive' | 'saloon' | 'emraan' | 'awarapan';
 
 export interface Track {
   /** YouTube video id, or a local id for audio tracks. */
@@ -60,6 +60,7 @@ const youTubeUrl = (playlistId: string) => `https://music.youtube.com/playlist?l
 export const SAFAR_PLAYLIST_ID = 'PLGRi6lrpu8X4';
 export const BUS_DRIVE_PLAYLIST_ID = 'PLeatb7hupNV_AWUl_7ttbsKeCQh8tF5N4';
 export const SALOON_PLAYLIST_ID = 'PLTJ1PnzCWyFw';
+export const AWARAPAN_PLAYLIST_ID = 'PLHuHXHyLu7BGiVIV7r3FC5s7ZZB7hG7_O';
 
 /** The "Best of Emraan Hashmi" compilation the Emraan section was built from. */
 export const EMRAAN_SOURCE_URL = 'https://music.youtube.com/watch?v=7AWIrVanz0w';
@@ -876,6 +877,426 @@ const EMRAAN_SNAPSHOT: readonly SnapshotRow[] = [
   ],
 ];
 
+/** "Top Emraan Hashmi Love Songs" — 84 tracks. */
+const AWARAPAN_SNAPSHOT: readonly SnapshotRow[] = [
+  [
+    'n_VrRuNkbrE',
+    'Toh Phir Aao - 8K/4K Music Video | Awarapan | Emraan Hashmi Song | Mustafa Zahid | Pritam',
+    'Sony Music India',
+  ],
+  [
+    'HX1EXb5kWwY',
+    'Ve Junoon | Awarapan 2 | Emraan Hashmi, Disha Patani | Vishesh Bhatt | Mithoon, Sayeed Q., Subodhh',
+    'Sony Music India and Vishesh Films',
+  ],
+  [
+    'g23pmazHwgE',
+    'Tera Mera Rishta Purana - 8K/4K Music Video | Awarapan | Emraan Hashmi Song | Mustafa Zahid | Pritam',
+    'Sony Music India',
+  ],
+  [
+    'dnND99uRz5o',
+    'Haan Tu Hain - 8K/4K Music Video | Emraan Hashmi, Sonal Chauhan | KK | Pritam | Jannat',
+    'Sony Music India',
+  ],
+  [
+    'ktPD6TMovxs',
+    'Humnava - Full Video | Hamari Adhuri Kahani | Emraan Hashmi, Vidya Balan | Papon | Mithoon',
+    'Sony Music India',
+  ],
+  [
+    'o8dOljHt_mU',
+    'Pritam, A.R. Rahman, Mohit Chauhan - Rab Ka Shukrana (Full Song Video)',
+    'SonyMusicIndiaVEVO',
+  ],
+  [
+    'i_HFdi1xxFM',
+    'Tera Deedar Hua - Full Song | Emraan Hashmi | Esha Gupta | Pritam | Javed Ali',
+    'SonyMusicIndiaVEVO',
+  ],
+  [
+    '-7_MyOao-eE',
+    'Tu Hi Haqeeqat Lyric Video - Tum Mile|Emraan Hashmi,Soha Ali Khan|Pritam|Javed Ali|Shadab',
+    'Sony Music India',
+  ],
+  [
+    'yBa3FVQKAvY',
+    'Tu Hi Mera - Full Video | Emraan Hashmi, Esha Gupta | Jannat 2 | Shafqat Amanat Ali | Pritam',
+    'SonyMusicIndiaVEVO',
+  ],
+  [
+    'pX5m9gN7Z60',
+    'Kya Full Video - Crook|Emraan Hashmi, Neha|Neeraj Shridhar|Pritam|Mohit Suri,Mukesh Bhatt',
+    'SonyMusicIndiaVEVO',
+  ],
+  [
+    'uqF-Rt8tcpg',
+    "Mere Bina Lyric Video - Crook | Emraan Hashmi, Neha | Nikhil D'Souza | Pritam | Mukesh Bhatt",
+    'SonyMusicIndiaVEVO',
+  ],
+  [
+    'MJDIDTb2Zwk',
+    'Kya Lyric Video - Crook|Emraan Hashmi,Neha|Neeraj Shridhar|Pritam|Mohit Suri,Mukesh Bhatt',
+    'SonyMusicIndiaVEVO',
+  ],
+  [
+    'mbGNF4QXaEE',
+    'Yaaram Full Video - Ek Thi Daayan|Emraan, Kalki, Huma|Sunidhi Chauhan, Clinton Cerejo',
+    'SonyMusicIndiaVEVO',
+  ],
+  [
+    '853l2HVY-AM',
+    'Pakeezah Video Edit - Ungli|Emraan Hashmi|Kangna Ranaut|Gulraj Singh|Karan Johar',
+    'SonyMusicIndiaVEVO',
+  ],
+  [
+    'f3FFOBrMmdg',
+    'Humari Adhuri Kahani - Full Song | Arijit Singh | Emraan Hashmi, Vidya Balan | Jeet Gannguli',
+    'Sony Music India',
+  ],
+  [
+    'oyaudgo5_8Y',
+    'Hasi Full Video, Ami Mishra - Hamari Adhuri Kahani | Emraan Hashmi, Vidya Balan | Mohit Suri',
+    'Sony Music India',
+  ],
+  [
+    '705E59Lrcos',
+    'Yeh Kaisi Jagah Full Video - Hamari Adhuri Kahani|Emraan Hashmi,Vidya Balan|Deepali Sathe',
+    'SonyMusicIndiaVEVO',
+  ],
+  [
+    'F-co5-9hZjg',
+    'Teri Khushboo - Arijit Singh | Emraan Hashmi, Amyra | Jeet Gannguli | Mr. X',
+    'SonyMusicIndiaVEVO',
+  ],
+  [
+    'dFCFAhAONgk',
+    'Tu Jo Hain Full Video - Mr. X | Emraan Hashmi, Amyra Dastur | Ankit Tiwari | Monish Raza',
+    'SonyMusicIndiaVEVO',
+  ],
+  [
+    'UeaO8uEXp0c',
+    'Rab Ka Shukrana | Jannat 2 | Emraan Hashmi, Esha Gupta | Mohit Chauhan | Pritam | Romantic songs',
+    'Sony Music India',
+  ],
+  [
+    'ybFC4Gx-FlM',
+    'Dekhha Tenu | Tu Hain Toh | Rajkummar Rao | Janhvi Kapoor | Mr. & Mrs. Mahi | Video Jukebox',
+    'Sony Music India',
+  ],
+  [
+    '8_uNrBN3f2Q',
+    'Best of Emraan Hashmi | Tu Hi Haqeeqat | Zara Sa | Mere Bina | Maahi | Soniyo | Top 15 Love Songs',
+    'Sony Music India',
+  ],
+  [
+    '3QhajVg6SjE',
+    'Tu Hi Haqeeqat - Lyrical Song | Tum Mile | Emraan Hashmi | Soha Ali Khan | Javed Ali | Pritam',
+    'Sony Music India',
+  ],
+  [
+    'VfRd8NI944E',
+    'Lazy Lad - Lyrical Video | Ghanchakkar | Emraan Hashmi | Vidya Balan | Richa Sharma | Amit Trivedi',
+    'Sony Music India',
+  ],
+  [
+    'U2QNhsAgIIE',
+    'KK | Dil Ibaadat Kar Raha Hai (Lyrical Video) | Emraan Hashmi | Soha Ali Khan | Pritam | Tum Mile',
+    'Sony Music India',
+  ],
+  [
+    'FOkVXadnO88',
+    'Hasi Ban Gaye (Lyrical Video) Male Version | Emraan Hashmi, Vidya Balan | Ami Mishra | Mohit Suri',
+    'Sony Music India',
+  ],
+  [
+    'APfqfKHdgpQ',
+    'KK | Haan Tu Hain (Lyrical Video) | Emraan Hashmi | Jannat | Sonal Chauhan | Pritam | Sayeed Quadri',
+    'Sony Music India',
+  ],
+  [
+    'mfNnCKMx-tk',
+    'Tu Hi Mera - Audio Lyrical | Emraan Hashmi, Esha Gupta | Jannat 2 | Shafqat Amanat Ali | Pritam',
+    'Sony Music India',
+  ],
+  [
+    'G-CBwdL4pZU',
+    'Maahi - 8K/4K Music Video | Emraan Hashmi | Kangana Ranaut | Raaz 2 | Shaarib Toshi',
+    'Sony Music India',
+  ],
+  [
+    'sVRwZEkXepg',
+    'Hamari Adhuri Kahani - Lyrical Song | Arjit Singh | Emraan Hashmi, Vidya Balan | Jeet Gannguli',
+    'Sony Music India',
+  ],
+  [
+    'bYxI4GeVuOc',
+    'Jannatein Kahan - Lyrical Song | Jannat 2 | Emraan Hashmi, Esha Gupta | Pritam | KK Superhit Song',
+    'Sony Music India',
+  ],
+  [
+    'eaylDzP0NPg',
+    "Mere Bina - Audio Lyrical | Emraan Hashmi, Neha Sharma | Nikhil D'Souza | Pritam | Crook",
+    'Sony Music India',
+  ],
+  [
+    '4XRpFXy-TwU',
+    'Alif Se - Lyrical Video | Mr. X | Gurmeet C, Emraan Hashmi, Nora Fatehi | Ankit Tiwari, Neeti Mohan',
+    'Sony Music India',
+  ],
+  [
+    '5wIXDjtv1fE',
+    'Yaaram - Lyrical Video | Ek Thi Daayan | Emraan Hashmi, Kalki, Huma | Sunidhi Chauhan & Clinton C',
+    'Sony Music India',
+  ],
+  [
+    'Hm02o6YgYS4',
+    'Pakeezah - Audio Lyrical | Emraan Hashmi | Kangna Ranaut | Ungli | Gulraj Singh | Love Song',
+    'Sony Music India',
+  ],
+  [
+    'S6Gdnxtw9rM',
+    'O Jaana - Lyrical Video | KK | Kangana Ranaut, Adhyayan Suman, Emraan Hashmi | Raju Singh',
+    'Sony Music India',
+  ],
+  [
+    '_n0RaYlS06Q',
+    'Emraan Hashmi Romantic Songs Mashup | Best Of Emraan Hashmi | Dj Raahul Pai & Dj Saquib',
+    'Sony Music India',
+  ],
+  [
+    'Zheks4f_afI',
+    'Tu Jo Hain - Lyrical Video | Mr. X | Emraan Hashmi, Amyra Dastur | Ankit Tiwari | Romantic Hit Song',
+    'Sony Music India',
+  ],
+  [
+    'BQSMgvwrilI',
+    'Tera Deedar Hua - Lyrical Song | Emraan Hashmi, Esha | Jannat 2 | Javed Ali | Rahat Fateh Ali Khan',
+    'Sony Music India',
+  ],
+  [
+    '2SsbXS1IM6I',
+    'Yeh Kaisi Jagah - Lyrical Song | Emraan Hashmi, Vidya Balan | Hamari Adhuri Kahani | Deepali Sathe',
+    'Sony Music India',
+  ],
+  [
+    'nF4RAgy6Jkk',
+    'KK | Dil Ibaadat - Rock Version (Lyrical Video) | Emraan Hashmi | Soha Ali Khan | Pritam | Tum Mile',
+    'Sony Music India',
+  ],
+  [
+    '7fjaLJu4BrE',
+    'Judai - Lyrical video | Kamran Ahmed | Emraan Hashmi | Sonal Chauhan | Pritam | Jannat',
+    'Sony Music India',
+  ],
+  [
+    '-8C_2BBVWk8',
+    'KK | Zara Sa - Audio Lyrical | Emraan Hashmi | Sonal Chauhan | Pritam | Sayeed Quadri | Jannat',
+    'Sony Music India',
+  ],
+  [
+    's4JsOMNFZiA',
+    "Challa - Lyrical Video | Emraan Hashmi | Neha Sharma | Babbu Mann, Suzanne D'Mello | Pritam | Crook",
+    'Sony Music India',
+  ],
+  [
+    'bEt5rbf1Rnc',
+    'Kaali Kaali - 8K/4K Music Video | Emraan Hashmi, Huma Qureshi | Ek Thi Daayan | Clinton Cerejo',
+    'Sony Music India',
+  ],
+  [
+    'C9GVzvjgmwA',
+    'Jannat All Songs - Video Jukebox | Zara sa | Haan tu hai | KK | Emraan Hashmi | Pritam | Love Songs',
+    'Sony Music India',
+  ],
+  [
+    'yynPV_JCfNw',
+    'Teri Khushboo - 8K/4K Music Video | Arijit Singh | Emraan Hashmi, Amyra | Jeet Gannguli | Mr. X',
+    'Sony Music India',
+  ],
+  [
+    'CaEJ5_zdgFg',
+    'KK - Kaisa Ye Raaz Hai | Lyrical Video | Emraan Hashmi | Kangana Ranaut | Pranay M. Rijia',
+    'Sony Music India',
+  ],
+  [
+    'LF3KvK6U270',
+    'Saad Shukrana - 8K/4K Music Video | Mr. X | Emraan Hashmi, Amyra Dastur | Ankit Tiwari',
+    'Sony Music India',
+  ],
+  [
+    '0_6j1jxCoFw',
+    'Tum Mile - Love Reprise | Lyrical Video | Emraan Hashmi | Soha Ali Khan | Javed Ali | Pritam',
+    'Sony Music India',
+  ],
+  [
+    'Nl8jRJJIySE',
+    'Kya - 8K/4K Music Video | Emraan Hashmi, Neha Sharma | Crook | Neeraj Shridhar | Pritam',
+    'Sony Music India',
+  ],
+  [
+    'cxEv8whJhfI',
+    'Bollywood Nostalgic Hit Songs | Bollywood Love Songs | 2000s Best Songs | Evergreen Hindi Songs',
+    'Sony Music India',
+  ],
+  [
+    'EQ8qW_HStXQ',
+    'TOP 20 ICONIC Bollywood Songs | 2 Hours NonStop | Best Hindi Love Songs | Romantic Hindi Hits',
+    'Sony Music India',
+  ],
+  [
+    'rfD9RgDg4uE',
+    'Hasi - 8K/4K Music Video | Emraan Hashmi, Vidya Balan | Ami Mishra | Hamari Adhuri Kahani',
+    'Sony Music India',
+  ],
+  [
+    'q7l0AxOIJ40',
+    'Hamari Adhuri Kahani - 8K/4K Music Video | Arjit Singh | Emraan Hashmi, Vidya Balan | Jeet Gannguli',
+    'Sony Music India',
+  ],
+  [
+    'nfcufQVUdWo',
+    'Tum Mile (Afro House Mix) Emraan Hashmi | Soha Ali Khan | DJ Basque | Neeraj Shridhar | Pritam',
+    'Sony Music India',
+  ],
+  [
+    'Hkf-fHeJhH4',
+    'KK - O Meri Jaan | Audio Lyrical | Tum Mile | Emraan Hashmi, Soha Ali Khan | Pritam',
+    'Sony Music India',
+  ],
+  [
+    'UrDhGWi9hKw',
+    'Humnava - 8K/4K Music Video | Emraan Hashmi, Vidya Balan | Hamari Adhuri Kahani | Papon | Mithoon',
+    'Sony Music India',
+  ],
+  [
+    'ghstBv1TxJs',
+    'Emraan Hashmi Romantic Songs Mashup | DJ Angel | Shaarib Toshi | KK | Pritam',
+    'Sony Music India',
+  ],
+  [
+    'qrIr5MYsnfs',
+    'Rab Ka Shukrana - Reprise | Lyrical | Emraan Hashmi, Esha Gupta | Anupam Amod | Jannat 2 | Pritam',
+    'Sony Music India',
+  ],
+  [
+    'eESg95AqmbA',
+    'Jannat - Audio Jukebox | 10 Years of Jannat | Emraan Hashmi | Evergreen Hits',
+    'Sony Music India',
+  ],
+  [
+    '7KhG5uAZKTw',
+    'Mohit Chauhan - Tujhko Jo Paaya | Video Lyrical | Emraan Hashmi | Neha Sharma | Pritam | Crook',
+    'Sony Music India',
+  ],
+  [
+    'JaM5AUsKOSg',
+    'Ek Thi Daayan - Audio Jukebox | Emran Hashmi | Yaaram, Kaali Kaali | Evergreen Hindi Songs',
+    'Sony Music India',
+  ],
+  [
+    'pGcbthDbU_k',
+    'Shreya Ghoshal - Hasi | Audio Lyrical | Emraan Hashmi, Vidya Balan | Hamari Adhuri Kahani',
+    'Sony Music India',
+  ],
+  [
+    'Qb3JOTwGcGw',
+    'Judai - HD Music Video | Emraan Hashmi | Sonal Chauhan | Pritam | Kamran Ahmed | Jannat | Dekho HD',
+    'Sony Music India',
+  ],
+  [
+    'dznJcA5y6gc',
+    'Sang Hoon Tere - Lyrical Video | Emraan Hashmi, Esha | Nikhil Dsouza | Pritam Chakraborty | Jannat 2',
+    'Sony Music India',
+  ],
+  [
+    'ActXAI00aKU',
+    'Auliya – Lyrical Audio | Armaan Malik | Emraan Hashmi, Kangana Ranaut | Ungli',
+    'Sony Music India',
+  ],
+  [
+    'kZtOtMj4yp8',
+    'RAAZ - The Mystery Continues | Maahi, Soniyo, O Jaana | Audio Jukebox | Emraan Hashmi, Kangana R',
+    'Sony Music India',
+  ],
+  [
+    'PJDxZDcQ9ts',
+    'Valentine Special 2026 | Superhit Hindi Love Songs | Best of Bollywood Romantic Hits | Audio Jukebox',
+    'Sony Music India',
+  ],
+  [
+    'Ky1wwpXVpyk',
+    'Best of Emraan Hashmi Songs in 8K | Kya, Haan Tu Hain, Maahi, Hasi, Humnava | Valentine Special',
+    'Sony Music India',
+  ],
+  [
+    'bxHPqrp_llE',
+    'Emraan Hashmi Superhit Songs | Tum Mile, Tu Hi Mera, Mere Bina, Maahi  | Nostalgic Bollywood Songs',
+    'Sony Music India',
+  ],
+  [
+    'a1aE3iHIDhM',
+    'Maahi - Audio Lyrical | Emraan Hashmi | Kangana Ranaut | Raaz 2 | Shaarib Toshi',
+    'Sony Music India',
+  ],
+  [
+    'rxdMjVyimqE',
+    'Tu Jo Hain Toh Main Hoon - 8K/4K Music Video | Emraan Hashmi, Amyra Dastur | Ankit Tiwari | Mr. X',
+    'Sony Music India',
+  ],
+  [
+    'R8Q6Up_3lTU',
+    'Mr.X All Songs | Tu Jo hai, Alif se, Teri Khushboo | Emraan H, Amyra | Ankit Tiwari | Jeet Gannguli',
+    'Sony Music India',
+  ],
+  [
+    't3ZlCLTyP-0',
+    'KK - Mat Aazma Re | Audio Lyrical | Randeep Hooda | Aditi Rao | Pritam | Sayeed Quadri | Murder 3',
+    'Sony Music India',
+  ],
+  [
+    '_mVxFIp46Bc',
+    'Kya - Audio Song | Emraan Hashmi | Neha Sharma | Crook | Neeraj Shridhar | Pritam',
+    'Sony Music India',
+  ],
+  [
+    '76bHXlozrZ4',
+    'KK | Tujhe Sochta Hoon - 8K/4K Music Video | Emraan Hashmi | Esha Gupta | Pritam | Jannat 2',
+    'Sony Music India',
+  ],
+  [
+    'jQTSk-12POI',
+    'Teri Jhuki Nazar - Full Audio | Pritam | Shafqat Amanat Ali | Aditi Rao | Randeep Hooda | Murder 3',
+    'Sony Music India',
+  ],
+  ['5jdvpg-Ely4', '19 years still feels like yesterday.', 'Sony Music India'],
+  [
+    'SpgjABjv7SY',
+    'Emraan Hashmi Songs Sunset Mix 2026 | Beach View | DJ Basque | Bollywood Progressive, Afro House',
+    'Sony Music India',
+  ],
+  [
+    '1s6Sci8UrxU',
+    'Tum Mile - Audio Lyrical | Emraan Hashmi, Soha Ali Khan | Neeraj Shridhar | Pritam',
+    'Sony Music India',
+  ],
+  [
+    'YRCMVmDPpkA',
+    'Kesariya - Synthwave Remix (Visualiser) | Arijit Singh | Ranbir K, Alia Bhatt | Pritam | Brahmastra',
+    'Sony Music India',
+  ],
+  [
+    'mX0_1yejIQI',
+    'Woh Lamhe Woh Baatein - Lyrical Video | Emraan Hashmi | Atif Aslam | Shamita Shetty | Zeher',
+    'Sony Music India',
+  ],
+  [
+    'FJzE1p3mvw8',
+    'Mahiya - 8K/4K Music Video | Awarapan | Emraan Hashmi, Mrinalini Sharma | Pritam | Sayeed Quadri',
+    'Sony Music India',
+  ],
+];
+
 export const PLAYLISTS: readonly Playlist[] = [
   {
     id: 'safar',
@@ -913,6 +1334,17 @@ export const PLAYLISTS: readonly Playlist[] = [
     // No playlist to link: the badge points at the compilation this came from.
     youTubeUrl: EMRAAN_SOURCE_URL,
     source: { kind: 'youtube', tracks: toTracks(EMRAAN_SNAPSHOT) },
+  },
+  {
+    id: 'awarapan',
+    name: 'Awarapan',
+    wordmark: 'आवारापन',
+    youTubeUrl: youTubeUrl(AWARAPAN_PLAYLIST_ID),
+    source: {
+      kind: 'youtube',
+      playlistId: AWARAPAN_PLAYLIST_ID,
+      tracks: toTracks(AWARAPAN_SNAPSHOT),
+    },
   },
 ];
 
