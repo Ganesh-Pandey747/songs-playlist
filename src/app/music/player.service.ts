@@ -179,7 +179,7 @@ export class PlayerService {
   private createBackend(playlist: Playlist): PlaybackBackend {
     const source = playlist.source;
     return source.kind === 'youtube'
-      ? new YouTubeBackend(source.playlistId, source.tracks, this.sink)
+      ? new YouTubeBackend(source.tracks, this.sink)
       : new AudioBackend(source.tracks, this.sink);
   }
 

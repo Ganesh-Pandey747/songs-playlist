@@ -62,12 +62,14 @@ volume and resumes playing if music was already going.
 `PlayerService` holds all playback state as signals and forwards commands to one of two backends,
 chosen by the active playlist's `source.kind`:
 
-- **`youtube`** → [`YouTubeBackend`](src/app/music/playback/youtube-backend.ts) streams a real
-  playlist through the YouTube IFrame Player API. The playlist is the source of truth for order and
-  contents, so editing it on YouTube changes the app. YouTube reports no `timeupdate`, so the
-  position is polled every 250 ms; videos whose owner disallows embedding are skipped
-  automatically. The iframe is a real 320×180 player parked off-screen — the illustration is the
-  interface.
+- **`youtube`** → [`YouTubeBackend`](src/app/music/playback/youtube-backend.ts) plays through the
+  YouTube IFrame Player API, queueing videos **by id** from the snapshot rather than by playlist id.
+  Loading by playlist id (`listType: 'playlist'`) fails with error 150 on some playlists: the player
+  reports ready but `getPlaylist()` returns null, so there's nothing to play or even skip to.
+  Queueing ids works everywhere, at the cost of the snapshot deciding what plays. YouTube reports no
+  `timeupdate`, so position is polled every 250 ms; uploads that block embedding are skipped
+  automatically (up to one full lap of the queue). The iframe is a real 320×180 player parked
+  off-screen — the illustration is the interface.
 - **`audio`** → [`AudioBackend`](src/app/music/playback/audio-backend.ts) plays media files through
   a single `HTMLAudioElement`. No section uses it at the moment; it stays as the path for music you
   host yourself.
@@ -78,10 +80,10 @@ it changes only when the source says so, so the UI can't disagree with what you 
 
 ## Changing the music
 
-**A YouTube playlist**: edit the `playlistId` in [`playlists.ts`](src/app/music/playlists.ts). The
-`SNAPSHOT` arrays next to it are only there to show readable names in the queue before anything
-plays; a video that isn't in the snapshot still plays and takes its name from the player. To
-refresh a snapshot, copy `[videoId, title, channel]` rows from the playlist page.
+**A YouTube playlist**: the `SNAPSHOT` arrays in [`playlists.ts`](src/app/music/playlists.ts) are
+what actually plays, so edit those — each row is `[videoId, raw title, channel]`. The `playlistId`
+constants only feed the "YouTube Music" badge link. Changing a playlist on YouTube does **not**
+change the app until you refresh its snapshot.
 
 **Your own files**: drop them into `public/audio/`, then give the section an `audio` source instead:
 

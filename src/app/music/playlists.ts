@@ -2,10 +2,11 @@
  * Playlist catalogue for the Safar experience.
  *
  * Two kinds of source are supported:
- *  - `youtube` streams a real YouTube playlist through the IFrame Player API.
- *    The playlist itself is the source of truth for order and contents; the
- *    snapshots below only supply readable names for the queue, so a video added
- *    to a playlist later still plays (its name then comes from the player).
+ *  - `youtube` plays videos through the IFrame Player API, queued by video id
+ *    from the snapshots below. Loading by playlist id instead fails with error
+ *    150 on some playlists (the player reports ready but hands back an empty
+ *    queue), so these snapshots — not the live playlist — decide what plays.
+ *    Re-run the extraction to pick up playlist changes.
  *  - `audio` plays plain media files through an <audio> element. No section uses
  *    it right now; it stays as the path for music you host yourself — drop files
  *    into `public/audio/` and point `src` at e.g. `audio/my-track.mp3`.
