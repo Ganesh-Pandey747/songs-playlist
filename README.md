@@ -4,6 +4,8 @@ A one-page immersive music experience built with **Angular 22**, inspired by
 [safaraudio.netlify.app](https://safaraudio.netlify.app/): a full-bleed editorial illustration, a
 live clock, and a floating translucent player.
 
+**Live: https://ganesh-pandey747.github.io/songs-playlist/**
+
 ## Run it
 
 The Angular 22 CLI needs Node **≥ 22.22.3** (or 24.x / 26.x). A `.nvmrc` pins 24.
@@ -14,6 +16,14 @@ npm install
 npm start          # http://localhost:4200
 npm run build      # production bundle in dist/safar
 ```
+
+## Deploying
+
+Every push to `main` publishes to GitHub Pages via
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). The site lives at a repo subpath,
+so the workflow builds with `--base-href /songs-playlist/` and copies `index.html` to `404.html` —
+Pages has no rewrite rules, so without that fallback a refresh on `/music` would 404 instead of
+reaching the Angular router.
 
 ## Playlists
 
