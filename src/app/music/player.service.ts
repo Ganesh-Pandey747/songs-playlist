@@ -1,6 +1,7 @@
 import { Injectable, computed, effect, signal } from '@angular/core';
 import { AudioBackend } from './playback/audio-backend';
 import { NowPlaying, PlaybackBackend, PlaybackSink } from './playback/playback-backend';
+import { PreviewBackend } from './playback/preview-backend';
 import { YouTubeBackend } from './playback/youtube-backend';
 import { DEFAULT_PLAYLIST_ID, PLAYLISTS, Playlist, PlaylistId, Track } from './playlists';
 
@@ -8,6 +9,16 @@ import { DEFAULT_PLAYLIST_ID, PLAYLISTS, Playlist, PlaylistId, Track } from './p
 const RESTART_THRESHOLD = 3;
 
 const UNKNOWN_TRACK: Track = { id: 'unknown', title: 'सफ़र', artist: 'Loading…' };
+
+const AD_FREE_KEY = 'safar.ad-free';
+
+function readStoredAdFree(): boolean {
+  try {
+    return localStorage.getItem(AD_FREE_KEY) === 'true';
+  } catch {
+    return false;
+  }
+}
 
 function formatTime(seconds: number): string {
   if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
@@ -21,6 +32,10 @@ function formatTime(seconds: number): string {
  * Single owner of playback for the app. Holds the state as signals and forwards
  * commands to whichever backend the active playlist needs — the YouTube IFrame
  * player for `youtube` playlists, an `<audio>` element for `audio` ones.
+ *
+ * `youtube` playlists have a second mode: with ad-free playback on, the same
+ * queue runs through `PreviewBackend`, which plays ~30 second clips from Apple's
+ * preview CDN so nothing can be advertised between tracks.
  */
 @Injectable({ providedIn: 'root' })
 export class PlayerService {
@@ -28,6 +43,8 @@ export class PlayerService {
 
   private readonly playlistId = signal<PlaylistId>(DEFAULT_PLAYLIST_ID);
   private readonly trackIndex = signal(0);
+  /** Ad-free clips instead of full YouTube videos. Remembered between visits. */
+  private readonly adFree = signal(readStoredAdFree());
   /** The backend's own view of the queue; falls back to the snapshot. */
   private readonly liveQueue = signal<readonly Track[] | null>(null);
   /** Title/artist for tracks the snapshot doesn't cover. */
@@ -52,6 +69,10 @@ export class PlayerService {
   /** False until the first successful play — drives the "tap to start" prompt. */
   readonly hasStarted = this.started.asReadonly();
   readonly activeTrackIndex = this.trackIndex.asReadonly();
+  readonly isAdFree = this.adFree.asReadonly();
+
+  /** Ad-free mode only has clips for YouTube queues; hosted audio is already clean. */
+  readonly canGoAdFree = computed(() => this.activePlaylist().source.kind === 'youtube');
 
   readonly activePlaylist = computed<Playlist>(
     () => this.playlists.find((p) => p.id === this.playlistId()) ?? this.playlists[0],
@@ -64,7 +85,11 @@ export class PlayerService {
     const fromSource = this.live();
     // Snapshot titles are already tidy, so prefer them; fall back to whatever
     // the source reports for tracks we have no snapshot entry for.
-    if (fromQueue && !fromQueue.title.startsWith('Track ')) return fromQueue;
+    if (fromQueue && !fromQueue.title.startsWith('Track ')) {
+      // A snapshot's artist is the uploading channel. In ad-free mode the match
+      // carries the actual performer, which is the better of the two.
+      return this.adFree() && fromSource ? { ...fromQueue, artist: fromSource.artist } : fromQueue;
+    }
     if (fromSource) return { id: fromQueue?.id ?? 'live', ...fromSource };
     return fromQueue ?? UNKNOWN_TRACK;
   });
@@ -141,12 +166,29 @@ export class PlayerService {
     if (id === this.activePlaylist().id) return;
 
     const resume = this.isPlaying() || this.hasStarted();
-    this.backend.destroy();
-    this.resetPlaybackState();
     this.playlistId.set(id);
-    this.backend = this.createBackend(this.activePlaylist());
-    this.backend.setVolume(this.level());
-    this.backend.start(0, resume);
+    this.rebuild(0, resume);
+  }
+
+  toggleAdFree(): void {
+    this.setAdFree(!this.adFree());
+  }
+
+  /**
+   * Swaps the source under the current track, holding position in the queue.
+   * Playback carries over only if it was already running, so flipping the switch
+   * on a paused player leaves it paused.
+   */
+  setAdFree(value: boolean): void {
+    if (value === this.adFree() || !this.canGoAdFree()) return;
+
+    this.adFree.set(value);
+    try {
+      localStorage.setItem(AD_FREE_KEY, String(value));
+    } catch {
+      // Preference just won't survive the session.
+    }
+    this.rebuild(this.trackIndex(), this.isPlaying());
   }
 
   /** Seeks by fraction of the track (0–1), as produced by the progress bar. */
@@ -176,11 +218,21 @@ export class PlayerService {
     this.setVolume(this.volume() > 0 ? 0 : 0.8);
   }
 
+  /** Tears the current backend down and starts a fresh one at `index`. */
+  private rebuild(index: number, autoplay: boolean): void {
+    this.backend.destroy();
+    this.resetPlaybackState();
+    this.backend = this.createBackend(this.activePlaylist());
+    this.backend.setVolume(this.level());
+    this.backend.start(index, autoplay);
+  }
+
   private createBackend(playlist: Playlist): PlaybackBackend {
     const source = playlist.source;
-    return source.kind === 'youtube'
-      ? new YouTubeBackend(source.tracks, this.sink)
-      : new AudioBackend(source.tracks, this.sink);
+    if (source.kind === 'audio') return new AudioBackend(source.tracks, this.sink);
+    return this.adFree()
+      ? new PreviewBackend(source.tracks, this.sink)
+      : new YouTubeBackend(source.tracks, this.sink);
   }
 
   private resetPlaybackState(): void {

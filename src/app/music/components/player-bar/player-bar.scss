@@ -159,6 +159,13 @@
   background: rgba(240, 190, 117, 0.14);
 }
 
+/* Lit only while ad-free clips are on, so the mode is readable at a glance. */
+.adfree-btn.active {
+  opacity: 1;
+  color: #7fe3b0;
+  background: rgba(127, 227, 176, 0.15);
+}
+
 /* ---------- Progress ---------- */
 .progress-section {
   display: flex;
