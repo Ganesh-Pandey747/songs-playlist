@@ -1,0 +1,628 @@
+<div class="stage" [class.drifting]="animate()">
+  <!-- ============================ SAFAR — a bus stop at dusk ============================ -->
+  <svg
+    class="scene"
+    [class.active]="scene() === 'safar'"
+    viewBox="0 0 1600 900"
+    preserveAspectRatio="xMidYMid slice"
+    role="img"
+    aria-label="Editorial illustration of an Indian city bus at a roadside stop"
+  >
+    <defs>
+      <linearGradient id="safar-sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#071f57" />
+        <stop offset="55%" stop-color="#12429a" />
+        <stop offset="100%" stop-color="#2364bd" />
+      </linearGradient>
+      <linearGradient id="safar-ground" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#cfa677" />
+        <stop offset="100%" stop-color="#9d7247" />
+      </linearGradient>
+      <linearGradient id="safar-wall" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#f2a83f" />
+        <stop offset="100%" stop-color="#d97b25" />
+      </linearGradient>
+      <radialGradient id="safar-haze" cx="0.5" cy="0.42" r="0.6">
+        <stop offset="0%" stop-color="#ffd9a0" stop-opacity="0.28" />
+        <stop offset="100%" stop-color="#ffd9a0" stop-opacity="0" />
+      </radialGradient>
+    </defs>
+
+    <rect width="1600" height="900" fill="url(#safar-sky)" />
+    <rect width="1600" height="900" fill="url(#safar-haze)" />
+
+    <!-- Devanagari wordmark, sitting behind the bus -->
+    <text
+      class="wordmark"
+      x="800"
+      y="360"
+      text-anchor="middle"
+      fill="#f6efdc"
+      font-size="290"
+      font-weight="700"
+    >
+      सफ़र
+    </text>
+
+    <!-- Left building block -->
+    <g>
+      <rect x="-20" y="250" width="330" height="500" fill="url(#safar-wall)" />
+      <rect x="-20" y="250" width="330" height="18" fill="#b6631c" />
+      <rect x="200" y="330" width="110" height="420" fill="#c96f20" opacity="0.55" />
+      <g fill="#4a2a12">
+        <rect x="30" y="320" width="66" height="86" rx="4" />
+        <rect x="140" y="320" width="66" height="86" rx="4" />
+        <rect x="30" y="470" width="66" height="86" rx="4" />
+        <rect x="140" y="470" width="66" height="86" rx="4" />
+        <rect x="228" y="380" width="58" height="78" rx="4" />
+      </g>
+      <g fill="#e2452f">
+        <path d="M22 406h82l-14 34H36z" />
+        <path d="M132 406h82l-14 34h-54z" />
+      </g>
+      <rect x="20" y="600" width="230" height="150" fill="#2c4c86" />
+      <rect x="20" y="596" width="230" height="12" fill="#f6efdc" opacity="0.5" />
+    </g>
+
+    <!-- Palm tree -->
+    <g>
+      <path d="M298 700V330c0-14 24-14 24 0v370z" fill="#5b4326" />
+      <g fill="#1f6b3a">
+        <path d="M310 330c-70-46-128-40-160 6 52-16 104-8 150 22z" />
+        <path d="M310 330c66-50 126-48 160-4-54-18-106-12-152 20z" />
+        <path d="M310 332c-56-70-114-84-158-56 56 4 106 26 146 68z" />
+        <path d="M310 332c54-74 112-92 158-66-56 2-108 22-148 68z" />
+        <path d="M310 336c-16-84-52-124-102-132 40 32 68 76 82 136z" />
+      </g>
+      <circle cx="316" cy="342" r="12" fill="#8a5a22" />
+    </g>
+
+    <!-- Tree canopy, right edge -->
+    <g>
+      <rect x="1470" y="430" width="34" height="320" fill="#4a3520" />
+      <g fill="#24462a">
+        <circle cx="1420" cy="180" r="150" />
+        <circle cx="1560" cy="250" r="170" />
+        <circle cx="1470" cy="360" r="130" />
+      </g>
+      <g fill="#c8a52c" opacity="0.9">
+        <circle cx="1348" cy="120" r="22" />
+        <circle cx="1408" cy="72" r="17" />
+        <circle cx="1330" cy="220" r="19" />
+        <circle cx="1500" cy="120" r="21" />
+        <circle cx="1372" cy="300" r="18" />
+        <circle cx="1560" cy="80" r="16" />
+        <circle cx="1462" cy="230" r="15" />
+        <circle cx="1352" cy="392" r="17" />
+      </g>
+    </g>
+
+    <!-- Road & pavement -->
+    <rect x="0" y="700" width="1600" height="200" fill="url(#safar-ground)" />
+    <rect x="0" y="700" width="1600" height="10" fill="#e6c79b" opacity="0.7" />
+    <ellipse cx="820" cy="792" rx="470" ry="26" fill="#4a3116" opacity="0.35" />
+
+    <!-- The bus -->
+    <g>
+      <rect x="400" y="404" width="900" height="330" rx="26" fill="#f4e7cd" />
+      <path d="M400 430c0-14 12-26 26-26h60v330h-86z" fill="#e9dcc0" />
+      <rect x="400" y="560" width="900" height="66" fill="#f0c04a" />
+      <rect x="400" y="626" width="900" height="108" rx="10" fill="#cc4327" />
+      <rect x="400" y="404" width="900" height="16" rx="8" fill="#e8d7b4" />
+
+      <!-- Driver cabin glass -->
+      <rect x="416" y="440" width="150" height="110" rx="10" fill="#123a6d" opacity="0.85" />
+      <circle cx="500" cy="500" r="20" fill="#0d2a4f" />
+
+      <!-- Door -->
+      <rect x="590" y="436" width="96" height="300" rx="8" fill="#123a6d" opacity="0.55" />
+      <rect x="636" y="436" width="6" height="300" fill="#f4e7cd" opacity="0.6" />
+
+      <!-- Passenger windows with silhouettes -->
+      <g>
+        <rect x="706" y="440" width="560" height="112" rx="10" fill="#0f3768" opacity="0.9" />
+        <g fill="#f4e7cd" opacity="0.28">
+          <circle cx="760" cy="500" r="20" />
+          <circle cx="850" cy="494" r="20" />
+          <circle cx="940" cy="502" r="20" />
+          <circle cx="1030" cy="496" r="20" />
+          <circle cx="1120" cy="502" r="20" />
+          <circle cx="1210" cy="494" r="20" />
+          <rect x="734" y="524" width="52" height="30" rx="14" />
+          <rect x="824" y="518" width="52" height="36" rx="14" />
+          <rect x="914" y="526" width="52" height="28" rx="14" />
+          <rect x="1004" y="520" width="52" height="34" rx="14" />
+          <rect x="1094" y="526" width="52" height="28" rx="14" />
+          <rect x="1184" y="518" width="52" height="36" rx="14" />
+        </g>
+        <g stroke="#f4e7cd" stroke-width="5" opacity="0.5">
+          <line x1="796" y1="440" x2="796" y2="552" />
+          <line x1="886" y1="440" x2="886" y2="552" />
+          <line x1="976" y1="440" x2="976" y2="552" />
+          <line x1="1066" y1="440" x2="1066" y2="552" />
+          <line x1="1156" y1="440" x2="1156" y2="552" />
+        </g>
+      </g>
+
+      <!-- Lamps & grille -->
+      <g fill="#f6efdc">
+        <circle cx="440" cy="664" r="17" />
+        <circle cx="486" cy="664" r="17" />
+      </g>
+      <g fill="#8f2c19">
+        <rect x="424" y="596" width="140" height="12" rx="6" />
+        <rect x="424" y="616" width="140" height="12" rx="6" />
+      </g>
+
+      <!-- Wheels -->
+      <g>
+        <circle cx="620" cy="742" r="58" fill="#1a1620" />
+        <circle cx="620" cy="742" r="24" fill="#6b6470" />
+        <circle cx="1160" cy="742" r="58" fill="#1a1620" />
+        <circle cx="1160" cy="742" r="24" fill="#6b6470" />
+      </g>
+      <!-- Spare tyre -->
+      <circle cx="1330" cy="716" r="42" fill="#1a1620" />
+      <circle cx="1330" cy="716" r="18" fill="#3b3540" />
+    </g>
+
+    <!-- Figures: boarding, waiting, seated -->
+    <g>
+      <!-- Student boarding with backpack -->
+      <g transform="translate(660 560)">
+        <circle cx="0" cy="0" r="24" fill="#4a2f1c" />
+        <path d="M-22 24h44l10 120h-64z" fill="#f2e6cf" />
+        <rect x="-34" y="30" width="30" height="66" rx="12" fill="#2f6fb5" />
+        <rect x="-20" y="144" width="16" height="86" fill="#26436e" />
+        <rect x="4" y="144" width="16" height="86" fill="#26436e" />
+      </g>
+      <!-- Woman in a sari waiting -->
+      <g transform="translate(960 566)">
+        <circle cx="0" cy="0" r="23" fill="#3a2415" />
+        <path d="M-8 -22c-16 4-22 20-14 30l30-4z" fill="#1d1410" />
+        <path d="M-24 22h46l16 130h-74z" fill="#e8a52c" />
+        <path d="M-18 40l52 14-6 22-50-16z" fill="#c9762a" />
+        <rect x="30" y="46" width="34" height="46" rx="8" fill="#4f5f4a" />
+        <rect x="-14" y="152" width="14" height="78" fill="#7a5c33" />
+        <rect x="8" y="152" width="14" height="78" fill="#7a5c33" />
+      </g>
+      <!-- Man with a shoulder bag -->
+      <g transform="translate(1210 556)">
+        <circle cx="0" cy="0" r="24" fill="#2f1d12" />
+        <path d="M-24 24h48l8 108h-64z" fill="#f4ead6" />
+        <path d="M-22 30l52 74-10 8-52-72z" fill="#5a4a3a" />
+        <rect x="26" y="96" width="34" height="44" rx="8" fill="#4a3d30" />
+        <rect x="-20" y="132" width="18" height="100" fill="#3c3b46" />
+        <rect x="4" y="132" width="18" height="100" fill="#3c3b46" />
+      </g>
+      <!-- Seated figure on a kerb block -->
+      <g transform="translate(1420 620)">
+        <rect x="-56" y="120" width="150" height="60" fill="#b4915f" />
+        <rect x="-56" y="120" width="150" height="10" fill="#d9bd8c" />
+        <circle cx="0" cy="0" r="25" fill="#33200f" />
+        <path d="M-26 26h52l10 96h-72z" fill="#f2e7d2" />
+        <rect x="-16" y="122" width="88" height="20" rx="8" fill="#2f4364" />
+        <rect x="52" y="130" width="20" height="52" fill="#2f4364" />
+      </g>
+    </g>
+
+    <!-- Bicycle, bottom-left -->
+    <g stroke="#1c1a24" stroke-width="9" fill="none" opacity="0.95">
+      <circle cx="150" cy="800" r="74" />
+      <circle cx="386" cy="800" r="74" />
+      <path d="M150 800l84-108h96l56 108M234 692l-24 108M330 692l56 108" />
+      <path d="M232 690l-34-38h-42" stroke-width="11" />
+      <path d="M156 652h74" stroke-width="12" />
+    </g>
+
+    <rect class="grain" width="1600" height="900" fill="transparent" />
+  </svg>
+
+  <!-- ======================= BUS DRIVE — a night highway ======================= -->
+  <svg
+    class="scene"
+    [class.active]="scene() === 'bus-drive'"
+    viewBox="0 0 1600 900"
+    preserveAspectRatio="xMidYMid slice"
+    role="img"
+    aria-label="Editorial illustration of a night bus driving down an empty highway"
+  >
+    <defs>
+      <linearGradient id="drive-sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#04081f" />
+        <stop offset="55%" stop-color="#0d1c4a" />
+        <stop offset="100%" stop-color="#28407e" />
+      </linearGradient>
+      <radialGradient id="drive-moon-halo" cx="0.5" cy="0.5" r="0.5">
+        <stop offset="0%" stop-color="#ffeec4" stop-opacity="0.55" />
+        <stop offset="100%" stop-color="#ffeec4" stop-opacity="0" />
+      </radialGradient>
+      <linearGradient id="drive-road" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3a3346" />
+        <stop offset="100%" stop-color="#191622" />
+      </linearGradient>
+      <radialGradient id="drive-spill" cx="0.5" cy="0.5" r="0.5">
+        <stop offset="0%" stop-color="#ffd68f" stop-opacity="0.32" />
+        <stop offset="100%" stop-color="#ffd68f" stop-opacity="0" />
+      </radialGradient>
+      <linearGradient id="drive-beam" x1="1" y1="0" x2="0" y2="0">
+        <stop offset="0%" stop-color="#ffdd93" stop-opacity="0.5" />
+        <stop offset="100%" stop-color="#ffdd93" stop-opacity="0" />
+      </linearGradient>
+      <linearGradient id="drive-glass" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffd88a" />
+        <stop offset="100%" stop-color="#e8a63f" />
+      </linearGradient>
+    </defs>
+
+    <rect width="1600" height="900" fill="url(#drive-sky)" />
+
+    <!-- Stars -->
+    <g fill="#f4f0e2">
+      <circle cx="140" cy="90" r="3" opacity="0.9" />
+      <circle cx="300" cy="180" r="2" opacity="0.6" />
+      <circle cx="420" cy="70" r="2.5" opacity="0.75" />
+      <circle cx="560" cy="150" r="2" opacity="0.5" />
+      <circle cx="700" cy="60" r="3" opacity="0.85" />
+      <circle cx="880" cy="130" r="2" opacity="0.6" />
+      <circle cx="1020" cy="80" r="2.5" opacity="0.8" />
+      <circle cx="1160" cy="200" r="2" opacity="0.5" />
+      <circle cx="1420" cy="110" r="3" opacity="0.9" />
+      <circle cx="1540" cy="210" r="2" opacity="0.6" />
+      <circle cx="220" cy="260" r="2" opacity="0.45" />
+      <circle cx="960" cy="240" r="2" opacity="0.45" />
+    </g>
+
+    <!-- Moon -->
+    <circle cx="1290" cy="180" r="150" fill="url(#drive-moon-halo)" />
+    <circle cx="1290" cy="180" r="62" fill="#f6f0dc" />
+    <circle cx="1268" cy="164" r="10" fill="#e2dac2" opacity="0.7" />
+    <circle cx="1306" cy="200" r="14" fill="#e2dac2" opacity="0.55" />
+
+    <text
+      class="wordmark"
+      x="800"
+      y="360"
+      text-anchor="middle"
+      fill="#eae3cc"
+      font-size="168"
+      font-weight="700"
+      opacity="0.92"
+    >
+      बस ड्राइव
+    </text>
+
+    <!-- Distant hills -->
+    <path
+      d="M0 590c120-70 200-40 300 10s180-90 300-70 190 90 320 60 230-80 340-40 240 40 340 20v330H0z"
+      fill="#101a3c"
+    />
+    <path
+      d="M0 660c160-50 260 20 420 10s260-60 420-30 300 60 460 30 220-40 300-30v260H0z"
+      fill="#0a1029"
+    />
+
+    <!-- Roadside poles, receding to the right -->
+    <g stroke="#080b1c" stroke-width="9" fill="none">
+      <path d="M1500 700V430M1470 452h60" />
+      <path d="M1310 700V486M1288 502h44" stroke-width="7" />
+      <path d="M1190 700V530M1174 542h32" stroke-width="5" />
+    </g>
+    <g stroke="#080b1c" stroke-width="3" fill="none" opacity="0.8">
+      <path d="M1190 546c60-22 110-40 120-48M1332 500c60-22 130-40 168-48" />
+    </g>
+
+    <!-- Highway -->
+    <rect x="0" y="700" width="1600" height="200" fill="url(#drive-road)" />
+    <rect x="0" y="700" width="1600" height="6" fill="#5c5470" opacity="0.9" />
+    <!-- Headlight spill pooling on the asphalt ahead of the bus -->
+    <ellipse cx="230" cy="762" rx="330" ry="62" fill="url(#drive-spill)" />
+    <!-- Lane markings, kept clear of the very bottom edge -->
+    <g fill="#e8dcae" opacity="0.7">
+      <rect x="40" y="806" width="120" height="11" rx="5" />
+      <rect x="300" y="806" width="120" height="11" rx="5" />
+      <rect x="560" y="806" width="120" height="11" rx="5" />
+      <rect x="820" y="806" width="120" height="11" rx="5" />
+      <rect x="1080" y="806" width="120" height="11" rx="5" />
+      <rect x="1340" y="806" width="120" height="11" rx="5" />
+    </g>
+    <!-- Shoulder edge line -->
+    <rect x="0" y="742" width="1600" height="4" fill="#8f86a6" opacity="0.2" />
+
+    <!-- Headlight beams sweeping ahead of the bus -->
+    <path d="M430 596L20 500 20 706 430 664z" fill="url(#drive-beam)" />
+    <path d="M430 630L20 640 20 760 430 690z" fill="url(#drive-beam)" opacity="0.7" />
+
+    <!-- Motion streaks trailing behind -->
+    <g stroke="#cfe0ff" stroke-linecap="round" opacity="0.28">
+      <path d="M1270 470h250" stroke-width="4" />
+      <path d="M1290 528h230" stroke-width="3" />
+      <path d="M1265 590h280" stroke-width="4" />
+      <path d="M1300 648h210" stroke-width="3" />
+    </g>
+
+    <!-- The bus, mid-drive -->
+    <g>
+      <ellipse cx="830" cy="784" rx="420" ry="24" fill="#04060f" opacity="0.55" />
+
+      <rect x="430" y="398" width="810" height="302" rx="24" fill="#e6d9bd" />
+      <rect x="430" y="398" width="810" height="16" rx="8" fill="#f2e7cc" />
+      <rect x="430" y="556" width="810" height="52" fill="#e0a93c" />
+      <rect x="430" y="608" width="810" height="92" rx="8" fill="#a8331f" />
+
+      <!-- Windscreen -->
+      <path
+        d="M446 428h140v112H446a10 10 0 0 1-10-10v-92a10 10 0 0 1 10-10z"
+        fill="url(#drive-glass)"
+        opacity="0.9"
+      />
+      <circle cx="530" cy="492" r="17" fill="#5a3416" />
+
+      <!-- Warm lit passenger windows -->
+      <g>
+        <rect x="616" y="428" width="600" height="112" rx="8" fill="url(#drive-glass)" />
+        <!-- Passengers as one low bench of silhouettes rather than repeated icons -->
+        <g fill="#7a3a12" opacity="0.38">
+          <circle cx="670" cy="490" r="18" />
+          <circle cx="764" cy="484" r="20" />
+          <circle cx="850" cy="494" r="17" />
+          <circle cx="944" cy="482" r="19" />
+          <circle cx="1030" cy="492" r="18" />
+          <circle cx="1126" cy="486" r="20" />
+          <path d="M636 540c6-24 22-34 40-34s34 10 40 34z" />
+          <path d="M728 540c8-28 24-40 42-40s34 12 42 40z" />
+          <path d="M818 540c6-22 20-30 36-30s30 8 36 30z" />
+          <path d="M908 540c8-28 24-38 42-38s34 10 42 38z" />
+          <path d="M996 540c6-24 22-32 38-32s32 8 38 32z" />
+          <path d="M1090 540c8-28 24-40 42-40s34 12 42 40z" />
+        </g>
+        <g stroke="#e6d9bd" stroke-width="6" opacity="0.75">
+          <line x1="712" y1="428" x2="712" y2="540" />
+          <line x1="802" y1="428" x2="802" y2="540" />
+          <line x1="892" y1="428" x2="892" y2="540" />
+          <line x1="982" y1="428" x2="982" y2="540" />
+          <line x1="1072" y1="428" x2="1072" y2="540" />
+        </g>
+      </g>
+
+      <!-- Door -->
+      <rect x="592" y="424" width="14" height="276" fill="#c9b998" opacity="0.7" />
+
+      <!-- Headlamps -->
+      <g>
+        <circle cx="452" cy="648" r="15" fill="#fff3cf" />
+        <circle cx="452" cy="648" r="26" fill="#ffe9a8" opacity="0.28" />
+      </g>
+
+      <!-- Wheels, with a hint of spin blur -->
+      <g>
+        <circle cx="620" cy="716" r="54" fill="#12101a" />
+        <circle cx="620" cy="716" r="22" fill="#4f4859" />
+        <circle cx="1140" cy="716" r="54" fill="#12101a" />
+        <circle cx="1140" cy="716" r="22" fill="#4f4859" />
+      </g>
+      <g stroke="#6b6478" stroke-width="4" fill="none" opacity="0.5">
+        <path d="M566 716a54 54 0 0 1 20-42M1086 716a54 54 0 0 1 20-42" />
+      </g>
+
+      <!-- Exhaust puffs -->
+      <g fill="#8f9ab8" opacity="0.22">
+        <circle cx="1268" cy="686" r="20" />
+        <circle cx="1316" cy="668" r="26" />
+        <circle cx="1376" cy="652" r="32" />
+      </g>
+    </g>
+  </svg>
+
+  <!-- ============================ SALOON — a corner barbershop ============================ -->
+  <svg
+    class="scene"
+    [class.active]="scene() === 'saloon'"
+    viewBox="0 0 1600 900"
+    preserveAspectRatio="xMidYMid slice"
+    role="img"
+    aria-label="Editorial illustration of a neighbourhood barbershop interior"
+  >
+    <defs>
+      <linearGradient id="saloon-wall" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3d1f2a" />
+        <stop offset="60%" stop-color="#7a3324" />
+        <stop offset="100%" stop-color="#a4482a" />
+      </linearGradient>
+      <radialGradient id="saloon-lamp" cx="0.5" cy="0.5" r="0.5">
+        <stop offset="0%" stop-color="#ffdf9e" stop-opacity="0.95" />
+        <stop offset="100%" stop-color="#ffdf9e" stop-opacity="0" />
+      </radialGradient>
+      <linearGradient id="saloon-mirror" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#2b4a52" />
+        <stop offset="100%" stop-color="#123036" />
+      </linearGradient>
+      <clipPath id="pole-clip">
+        <rect x="1490" y="380" width="46" height="230" rx="23" />
+      </clipPath>
+    </defs>
+
+    <rect width="1600" height="900" fill="url(#saloon-wall)" />
+
+    <text
+      class="wordmark"
+      x="800"
+      y="370"
+      text-anchor="middle"
+      fill="#f7e7c4"
+      font-size="200"
+      font-weight="700"
+      opacity="0.95"
+    >
+      सैलून
+    </text>
+
+    <!-- Tiled dado along the wall -->
+    <g opacity="0.35" fill="#f0d3a3">
+      <rect x="0" y="470" width="1600" height="8" />
+      <rect x="0" y="620" width="1600" height="8" />
+    </g>
+
+    <!-- Wall lamps -->
+    <g>
+      <circle cx="250" cy="230" r="130" fill="url(#saloon-lamp)" />
+      <circle cx="1350" cy="230" r="130" fill="url(#saloon-lamp)" />
+      <g fill="#f5d894">
+        <path d="M226 150h48l22 66h-92z" />
+        <path d="M1326 150h48l22 66h-92z" />
+      </g>
+      <g fill="#3a2018">
+        <rect x="244" y="106" width="12" height="46" />
+        <rect x="1344" y="106" width="12" height="46" />
+      </g>
+    </g>
+
+    <!-- Mirrors -->
+    <g>
+      <rect x="150" y="330" width="260" height="290" rx="130" fill="url(#saloon-mirror)" />
+      <rect
+        x="150"
+        y="330"
+        width="260"
+        height="290"
+        rx="130"
+        fill="none"
+        stroke="#e8c07a"
+        stroke-width="10"
+      />
+      <path
+        d="M200 380c40 60 40 160 0 210"
+        stroke="#cfe4e6"
+        stroke-width="14"
+        fill="none"
+        opacity="0.35"
+      />
+
+      <rect x="1190" y="330" width="260" height="290" rx="130" fill="url(#saloon-mirror)" />
+      <rect
+        x="1190"
+        y="330"
+        width="260"
+        height="290"
+        rx="130"
+        fill="none"
+        stroke="#e8c07a"
+        stroke-width="10"
+      />
+      <path
+        d="M1240 380c40 60 40 160 0 210"
+        stroke="#cfe4e6"
+        stroke-width="14"
+        fill="none"
+        opacity="0.35"
+      />
+    </g>
+
+    <!-- Shelf of bottles, tucked between the left mirror and the chair -->
+    <g>
+      <rect x="438" y="596" width="182" height="13" rx="6" fill="#5d2f1e" />
+      <rect x="438" y="609" width="182" height="7" rx="3" fill="#42200f" />
+      <g>
+        <rect x="452" y="540" width="30" height="56" rx="8" fill="#78b39a" />
+        <rect x="494" y="524" width="26" height="72" rx="8" fill="#e0a24c" />
+        <rect x="532" y="552" width="34" height="44" rx="8" fill="#c96b5c" />
+        <rect x="578" y="534" width="28" height="62" rx="8" fill="#8fa8cf" />
+      </g>
+      <g fill="#3a2018">
+        <rect x="459" y="530" width="16" height="12" rx="4" />
+        <rect x="500" y="514" width="14" height="12" rx="4" />
+        <rect x="585" y="524" width="14" height="12" rx="4" />
+      </g>
+    </g>
+
+    <!-- Checkered floor -->
+    <g>
+      <rect x="0" y="650" width="1600" height="250" fill="#e8d6b4" />
+      <g fill="#3f2a22" opacity="0.85">
+        <rect x="0" y="650" width="100" height="60" />
+        <rect x="200" y="650" width="100" height="60" />
+        <rect x="400" y="650" width="100" height="60" />
+        <rect x="600" y="650" width="100" height="60" />
+        <rect x="800" y="650" width="100" height="60" />
+        <rect x="1000" y="650" width="100" height="60" />
+        <rect x="1200" y="650" width="100" height="60" />
+        <rect x="1400" y="650" width="100" height="60" />
+        <rect x="100" y="710" width="100" height="70" />
+        <rect x="300" y="710" width="100" height="70" />
+        <rect x="500" y="710" width="100" height="70" />
+        <rect x="700" y="710" width="100" height="70" />
+        <rect x="900" y="710" width="100" height="70" />
+        <rect x="1100" y="710" width="100" height="70" />
+        <rect x="1300" y="710" width="100" height="70" />
+        <rect x="1500" y="710" width="100" height="70" />
+        <rect x="0" y="780" width="120" height="120" />
+        <rect x="240" y="780" width="120" height="120" />
+        <rect x="480" y="780" width="120" height="120" />
+        <rect x="720" y="780" width="120" height="120" />
+        <rect x="960" y="780" width="120" height="120" />
+        <rect x="1200" y="780" width="120" height="120" />
+        <rect x="1440" y="780" width="120" height="120" />
+      </g>
+    </g>
+
+    <!-- Barber chair, centre stage -->
+    <g>
+      <ellipse cx="800" cy="836" rx="180" ry="28" fill="#2b1a16" opacity="0.4" />
+      <rect x="760" y="720" width="80" height="110" fill="#5a5560" />
+      <rect x="700" y="826" width="200" height="24" rx="12" fill="#3a3540" />
+      <rect x="662" y="640" width="276" height="90" rx="26" fill="#8d2f27" />
+      <rect x="662" y="640" width="276" height="18" rx="9" fill="#a94236" />
+      <rect x="672" y="470" width="150" height="180" rx="34" fill="#8d2f27" />
+      <rect x="686" y="486" width="122" height="150" rx="26" fill="#a94236" />
+      <rect x="690" y="404" width="112" height="76" rx="26" fill="#8d2f27" />
+      <g fill="#c9a24a">
+        <rect x="930" y="574" width="26" height="120" rx="12" />
+        <rect x="644" y="574" width="26" height="120" rx="12" />
+      </g>
+      <!-- Client under the cape -->
+      <g>
+        <path d="M726 502h64l42 148h-148z" fill="#f4ead6" />
+        <circle cx="758" cy="452" r="37" fill="#c98a58" />
+        <path d="M721 448a37 37 0 0 1 74 0c-4-30-70-30-74 0z" fill="#2b1d14" />
+        <path
+          d="M736 418h44a30 30 0 0 1 15 26c-14-16-60-18-74 2a30 30 0 0 1 15-28z"
+          fill="#2b1d14"
+        />
+      </g>
+    </g>
+
+    <!-- Barber at work -->
+    <g transform="translate(1010 470)">
+      <circle cx="0" cy="0" r="32" fill="#2f1d12" />
+      <path d="M-34 34h68l18 190h-104z" fill="#f2f0e6" />
+      <path d="M-40 60l-58 44 14 22 62-40z" fill="#f2f0e6" />
+      <path d="M-96 100l-40 24 12 20 42-24z" fill="#dcb08a" />
+      <rect x="-30" y="224" width="26" height="130" fill="#2f3b52" />
+      <rect x="6" y="224" width="26" height="130" fill="#2f3b52" />
+      <g fill="#cfd4da">
+        <rect x="-150" y="112" width="42" height="12" rx="6" transform="rotate(-18 -150 112)" />
+      </g>
+    </g>
+
+    <!-- Barber pole -->
+    <g>
+      <rect x="1490" y="380" width="46" height="230" rx="23" fill="#f2ead9" />
+      <g clip-path="url(#pole-clip)">
+        <g fill="#c9302c">
+          <rect x="1484" y="386" width="60" height="20" transform="rotate(20 1484 386)" />
+          <rect x="1484" y="446" width="60" height="20" transform="rotate(20 1484 446)" />
+          <rect x="1484" y="506" width="60" height="20" transform="rotate(20 1484 506)" />
+        </g>
+        <g fill="#2f5fa8">
+          <rect x="1484" y="416" width="60" height="20" transform="rotate(20 1484 416)" />
+          <rect x="1484" y="476" width="60" height="20" transform="rotate(20 1484 476)" />
+          <rect x="1484" y="536" width="60" height="20" transform="rotate(20 1484 536)" />
+        </g>
+      </g>
+      <rect x="1480" y="364" width="66" height="20" rx="8" fill="#c9a24a" />
+      <rect x="1480" y="606" width="66" height="20" rx="8" fill="#c9a24a" />
+    </g>
+  </svg>
+
+  <div class="vignette" aria-hidden="true"></div>
+</div>

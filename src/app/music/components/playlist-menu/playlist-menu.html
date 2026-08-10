@@ -1,0 +1,82 @@
+<div class="menu" [class.open]="open()" role="menu" aria-label="Playlist and queue">
+  <div class="section-label">Select Playlist</div>
+
+  @for (list of player.playlists; track list.id) {
+    <button
+      type="button"
+      role="menuitemradio"
+      class="row"
+      [class.active]="list.id === player.activePlaylist().id"
+      [attr.aria-checked]="list.id === player.activePlaylist().id"
+      (click)="choosePlaylist(list.id)"
+    >
+      <span class="row-name">{{ list.name }}</span>
+      <span class="row-meta">{{ list.source.tracks.length }} tracks</span>
+      @if (list.id === player.activePlaylist().id) {
+        <svg class="check" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+        </svg>
+      }
+    </button>
+  }
+
+  <div class="divider"></div>
+  <div class="section-label">Up Next</div>
+
+  <div class="queue">
+    @for (item of player.queue(); track item.id; let i = $index) {
+      <button
+        type="button"
+        role="menuitem"
+        class="row queue-row"
+        [class.active]="i === player.activeTrackIndex()"
+        (click)="chooseTrack(i)"
+      >
+        <span class="index">
+          @if (i === player.activeTrackIndex() && player.isPlaying()) {
+            <span class="mini-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          } @else {
+            {{ i + 1 }}
+          }
+        </span>
+        <span class="queue-text">
+          <span class="row-name">{{ item.title }}</span>
+          <span class="row-meta">{{ item.artist }}</span>
+        </span>
+      </button>
+    }
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="volume-row">
+    <button
+      type="button"
+      class="mute-btn"
+      (click)="player.toggleMute()"
+      [attr.aria-label]="player.volume() > 0 ? 'Mute' : 'Unmute'"
+    >
+      @if (player.volume() > 0) {
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+          <path d="M3 10v4h4l5 5V5L7 10H3zm13.5 2a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z" />
+        </svg>
+      } @else {
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+          <path
+            d="M3 10v4h4l5 5V5L7 10H3zm16.7-1.3-1.4-1.4L16 9.6l-2.3-2.3-1.4 1.4L14.6 11l-2.3 2.3 1.4 1.4L16 12.4l2.3 2.3 1.4-1.4L17.4 11z"
+          />
+        </svg>
+      }
+    </button>
+    <input
+      class="volume-slider"
+      type="range"
+      min="0"
+      max="100"
+      step="1"
+      [value]="player.volume() * 100"
+      (input)="onVolumeInput($event)"
+      aria-label="Volume"
+    />
+  </div>
+</div>

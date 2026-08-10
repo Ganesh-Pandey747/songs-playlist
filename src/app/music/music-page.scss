@@ -1,0 +1,123 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* ---------- Top-right utility badge ---------- */
+.yt-badge {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.88);
+  color: #16121b;
+  text-decoration: none;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 500;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition:
+    transform 0.25s var(--ease-smooth),
+    background 0.25s ease;
+
+  &:hover {
+    background: #fff;
+    transform: translateY(-1px);
+  }
+
+  .arrow {
+    opacity: 0.55;
+  }
+}
+
+/* ---------- Autoplay fallback ---------- */
+.start-prompt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 26px 13px 16px;
+  background: rgba(18, 14, 24, 0.62);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  animation: rise 0.6s var(--ease-smooth) both;
+
+  &:hover .ring {
+    transform: scale(1.08);
+    background: #fff;
+  }
+}
+
+.ring {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: #120e18;
+  transition:
+    transform 0.25s var(--ease-smooth),
+    background 0.25s ease;
+  box-shadow: 0 0 0 0 var(--accent-gold-glow);
+  animation: pulse 2.6s ease-out infinite;
+}
+
+@media (max-width: 767px) {
+  .yt-badge {
+    top: 16px;
+    right: 16px;
+    padding: 7px 13px;
+    font-size: 0.74rem;
+  }
+
+  .start-prompt {
+    font-size: 0.84rem;
+    padding: 11px 20px 11px 13px;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 14px));
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--accent-gold-glow);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(240, 190, 117, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(240, 190, 117, 0);
+  }
+}
