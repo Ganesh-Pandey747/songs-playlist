@@ -18,7 +18,7 @@
 
 import { cleanTitle } from './clean-title';
 
-export type PlaylistId = 'safar' | 'bus-drive' | 'saloon';
+export type PlaylistId = 'safar' | 'bus-drive' | 'saloon' | 'emraan';
 
 export interface Track {
   /** YouTube video id, or a local id for audio tracks. */
@@ -33,7 +33,12 @@ export interface AudioTrack extends Track {
 
 export type PlaylistSource =
   | { readonly kind: 'audio'; readonly tracks: readonly AudioTrack[] }
-  | { readonly kind: 'youtube'; readonly playlistId: string; readonly tracks: readonly Track[] };
+  | {
+      readonly kind: 'youtube';
+      /** Absent when the section was assembled by hand rather than from a playlist. */
+      readonly playlistId?: string;
+      readonly tracks: readonly Track[];
+    };
 
 export interface Playlist {
   readonly id: PlaylistId;
@@ -55,6 +60,9 @@ const youTubeUrl = (playlistId: string) => `https://music.youtube.com/playlist?l
 export const SAFAR_PLAYLIST_ID = 'PLGRi6lrpu8X4';
 export const BUS_DRIVE_PLAYLIST_ID = 'PLeatb7hupNV_AWUl_7ttbsKeCQh8tF5N4';
 export const SALOON_PLAYLIST_ID = 'PLTJ1PnzCWyFw';
+
+/** The "Best of Emraan Hashmi" compilation the Emraan section was built from. */
+export const EMRAAN_SOURCE_URL = 'https://music.youtube.com/watch?v=7AWIrVanz0w';
 
 /** "Banger songs play in bus" — 50 tracks. */
 const SAFAR_SNAPSHOT: readonly SnapshotRow[] = [
@@ -806,6 +814,68 @@ const SALOON_SNAPSHOT: readonly SnapshotRow[] = [
   ['Mfeg92XPXik', 'Dil Diwana (Duet)', 'Anuradha Paudwal Official'],
 ];
 
+/**
+ * "Best of Emraan Hashmi" — the 12 songs listed in the compilation at
+ * `EMRAAN_SOURCE_URL`, sourced one video per song.
+ *
+ * That upload is a single hour-long video, which would be one unskippable
+ * "track" here and has no counterpart in Apple's catalogue for ad-free mode. So
+ * each song points at its own official upload instead, chosen so that the
+ * cleaned title still matches the recording — "Bheege Honth Tere" reads better
+ * than the row below, but the only Apple result under that spelling is a
+ * karaoke version.
+ */
+const EMRAAN_SNAPSHOT: readonly SnapshotRow[] = [
+  [
+    'ZsAOnmByy38',
+    'Zara Sa | 4K Music Video | Jannat | Emraan Hashmi | Sonal Chauhan | KK | Pritam | Sayeed Quadri',
+    'Sony Music India',
+  ],
+  ['zZ1L9srWhco', 'Bheegey Hont (With Dialogue)', 'Anu Malik - Topic'],
+  ['cGNcjqXe87U', 'Tu Hi Meri Shab Hai', 'Pritam - Topic'],
+  [
+    'p4fxIdy7ndw',
+    'Pee Loon - Video Song | Mohit Chauhan | Once Upon A Time in Mumbai | Pritam | Emraan Hashmi, Prachi',
+    'T-Series Bollywood Classics',
+  ],
+  [
+    'sVRwZEkXepg',
+    'Hamari Adhuri Kahani - Lyrical Song | Arjit Singh | Emraan Hashmi, Vidya Balan | Jeet Gannguli',
+    'Sony Music India',
+  ],
+  ['3O6eYd8pUM8', 'Deewana kar Raha Hai Lyrical | Raaz 3 | Emraan Hashmi, Esha Gupta', 'T-Series'],
+  [
+    '3QhajVg6SjE',
+    'Tu Hi Haqeeqat - Lyrical Song | Tum Mile | Emraan Hashmi | Soha Ali Khan | Javed Ali | Pritam',
+    'Sony Music India',
+  ],
+  [
+    'xzUVPN68Ym4',
+    'Dil Ibaadat | Tum Mile | KK | Emraan Hashmi | Soha Ali Khan | Pritam | Sayeed Quadri | 4K',
+    'Sony Music India',
+  ],
+  [
+    'V1fbOsHBlZE',
+    'Haan Tu Hain - Full Video | Jannat | Emraan Hashmi, Sonal Chauhan | KK | Pritam | Sayeed Quadri',
+    'Sony Music India',
+  ],
+  [
+    'sSFM_hCFgko',
+    'Judai - Full Video | Emraan Hashmi | Sonal Chauhan | Kamran Ahmed | Pritam | Jannat',
+    'Sony Music India',
+  ],
+  [
+    'e1edxTqJnKk',
+    'Maahi - Full Video | Kangana Ranaut, Emraan Hashmi | Toshi & Sharib Sabri | Mohit Suri | Raaz 2',
+    'Sony Music India',
+  ],
+  [
+    'cZBFVrp3qgw',
+    '💭 Tujhe Sochta Hoon 4K Video | Jannat 2 | Emraan Hashmi | Esha Gupta | KK | Pritam | Sayeed Quadri 🌙',
+    'Sony Music India',
+  ],
+];
+
 export const PLAYLISTS: readonly Playlist[] = [
   {
     id: 'safar',
@@ -835,6 +905,14 @@ export const PLAYLISTS: readonly Playlist[] = [
       playlistId: SALOON_PLAYLIST_ID,
       tracks: toTracks(SALOON_SNAPSHOT),
     },
+  },
+  {
+    id: 'emraan',
+    name: 'Emraan',
+    wordmark: 'इमरान',
+    // No playlist to link: the badge points at the compilation this came from.
+    youTubeUrl: EMRAAN_SOURCE_URL,
+    source: { kind: 'youtube', tracks: toTracks(EMRAAN_SNAPSHOT) },
   },
 ];
 

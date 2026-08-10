@@ -624,5 +624,116 @@
     </g>
   </svg>
 
+  <!-- ====================== EMRAAN — a rain-slicked city at night ====================== -->
+  <svg
+    class="scene"
+    [class.active]="scene() === 'emraan'"
+    viewBox="0 0 1600 900"
+    preserveAspectRatio="xMidYMid slice"
+    role="img"
+    aria-label="Editorial illustration of a rain-slicked city skyline at night"
+  >
+    <defs>
+      <linearGradient id="emraan-sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0e1030" />
+        <stop offset="55%" stop-color="#2a1640" />
+        <stop offset="100%" stop-color="#5b2144" />
+      </linearGradient>
+      <radialGradient id="emraan-moon" cx="0.5" cy="0.5" r="0.5">
+        <stop offset="0%" stop-color="#ffe6c2" stop-opacity="0.9" />
+        <stop offset="100%" stop-color="#ffe6c2" stop-opacity="0" />
+      </radialGradient>
+      <linearGradient id="emraan-street" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1b1230" />
+        <stop offset="100%" stop-color="#3a1c38" />
+      </linearGradient>
+      <linearGradient id="emraan-glow" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffc98a" stop-opacity="0.5" />
+        <stop offset="100%" stop-color="#ffc98a" stop-opacity="0" />
+      </linearGradient>
+    </defs>
+
+    <rect width="1600" height="900" fill="url(#emraan-sky)" />
+
+    <!-- Moon behind the skyline -->
+    <circle cx="1230" cy="210" r="230" fill="url(#emraan-moon)" />
+    <circle cx="1230" cy="210" r="74" fill="#ffeacb" opacity="0.92" />
+
+    <!-- Sits above the skyline: the towers would otherwise cut the word in half -->
+    <text
+      class="wordmark"
+      x="800"
+      y="248"
+      text-anchor="middle"
+      fill="#f4dcc4"
+      font-size="200"
+      font-weight="700"
+      opacity="0.92"
+    >
+      इमरान
+    </text>
+
+    <!-- Far skyline -->
+    <g fill="#1a1236" opacity="0.85">
+      <rect x="40" y="430" width="120" height="270" />
+      <rect x="180" y="370" width="90" height="330" />
+      <rect x="290" y="470" width="140" height="230" />
+      <rect x="450" y="400" width="100" height="300" />
+      <rect x="1080" y="410" width="110" height="290" />
+      <rect x="1210" y="460" width="150" height="240" />
+      <rect x="1380" y="380" width="120" height="320" />
+    </g>
+
+    <!-- Near towers with lit windows -->
+    <g>
+      <rect x="560" y="330" width="150" height="370" fill="#120c28" />
+      <rect x="740" y="270" width="130" height="430" fill="#170f2e" />
+      <rect x="900" y="360" width="140" height="340" fill="#120c28" />
+      <g fill="#ffd18a" opacity="0.8">
+        <rect x="590" y="370" width="22" height="30" />
+        <rect x="640" y="370" width="22" height="30" />
+        <rect x="590" y="440" width="22" height="30" />
+        <rect x="660" y="500" width="22" height="30" />
+        <rect x="596" y="560" width="22" height="30" />
+        <rect x="770" y="310" width="22" height="30" />
+        <rect x="820" y="310" width="22" height="30" />
+        <rect x="770" y="390" width="22" height="30" />
+        <rect x="820" y="470" width="22" height="30" />
+        <rect x="776" y="560" width="22" height="30" />
+        <rect x="930" y="400" width="22" height="30" />
+        <rect x="980" y="400" width="22" height="30" />
+        <rect x="930" y="480" width="22" height="30" />
+        <rect x="986" y="560" width="22" height="30" />
+      </g>
+    </g>
+
+    <!-- Wet street -->
+    <rect x="0" y="700" width="1600" height="200" fill="url(#emraan-street)" />
+    <rect x="0" y="700" width="1600" height="6" fill="#7a4a63" opacity="0.5" />
+
+    <!-- Reflections pooling under the towers -->
+    <g fill="url(#emraan-glow)" opacity="0.55">
+      <rect x="596" y="706" width="22" height="150" />
+      <rect x="776" y="706" width="22" height="170" />
+      <rect x="936" y="706" width="22" height="140" />
+      <rect x="1222" y="706" width="16" height="180" />
+    </g>
+
+    <!-- Street lamp, throwing the only warm light at ground level -->
+    <g>
+      <rect x="1290" y="500" width="10" height="210" fill="#241a34" />
+      <path d="M1250 496h90l-18 -34h-54z" fill="#f2c98a" />
+      <circle cx="1295" cy="520" r="120" fill="url(#emraan-moon)" opacity="0.35" />
+    </g>
+
+    <!-- Rain -->
+    <g stroke="#cfd6ff" stroke-width="2" opacity="0.28">
+      <path d="M120 120l-26 90M260 60l-26 90M400 160l-26 90M520 40l-26 90M660 140l-26 90" />
+      <path d="M800 70l-26 90M940 170l-26 90M1080 90l-26 90M1220 150l-26 90M1360 60l-26 90" />
+      <path d="M180 320l-26 90M340 400l-26 90M500 340l-26 90M1000 380l-26 90M1160 320l-26 90" />
+      <path d="M60 460l-26 90M1420 420l-26 90M1520 300l-26 90M20 240l-26 90M1460 600l-26 90" />
+    </g>
+  </svg>
+
   <div class="vignette" aria-hidden="true"></div>
 </div>
