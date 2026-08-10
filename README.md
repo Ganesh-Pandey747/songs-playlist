@@ -20,7 +20,11 @@ npm run build      # production bundle in dist/safar
 ## Deploying
 
 Every push to `main` publishes to GitHub Pages via
-[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). The site lives at a repo subpath,
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). This needs **Settings → Pages →
+Build and deployment → Source: "GitHub Actions"** set once on the repo; the workflow's default
+token isn't allowed to turn Pages on by itself.
+
+The site lives at a repo subpath,
 so the workflow builds with `--base-href /songs-playlist/` and copies `index.html` to `404.html` —
 Pages has no rewrite rules, so without that fallback a refresh on `/music` would 404 instead of
 reaching the Angular router.

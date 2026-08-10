@@ -30,12 +30,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Requires Settings -> Pages -> Source: "GitHub Actions" to be set once.
+      # The default token can't enable Pages itself, so this reads the config
+      # rather than trying to create it.
       - name: Configure Pages
         id: pages
         uses: actions/configure-pages@v5
-        with:
-          # Turns Pages on for the repo if it isn't already.
-          enablement: true
 
       - name: Build
         env:
