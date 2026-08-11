@@ -41,6 +41,51 @@
   letter-spacing: 0.01em;
 }
 
+/* Saloon only: the scissors pivot on their screw, so the rotation origin is that
+   point in scene coordinates rather than either blade's own box. */
+.snip-blade {
+  transform-box: view-box;
+  transform-origin: 848px 431px;
+}
+
+/* Hidden until the barber is actually working, i.e. while audio plays. */
+.clipping {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+}
+
+/* The haircut runs with the music, like the ambient drift above. */
+.drifting .scene.active {
+  .snip-blade-top {
+    animation: snip-top 1.05s ease-in-out infinite;
+  }
+
+  .snip-blade-bottom {
+    animation: snip-bottom 1.05s ease-in-out infinite;
+  }
+
+  /* Staggered so the strands do not fall as one clump. */
+  .clipping {
+    animation: hair-fall 2.1s linear infinite;
+  }
+
+  .clipping-2 {
+    animation-duration: 2.4s;
+    animation-delay: 0.5s;
+  }
+
+  .clipping-3 {
+    animation-duration: 1.9s;
+    animation-delay: 1.05s;
+  }
+
+  .clipping-4 {
+    animation-duration: 2.6s;
+    animation-delay: 1.6s;
+  }
+}
+
 .vignette {
   position: absolute;
   inset: 0;
@@ -63,5 +108,54 @@
   }
   to {
     transform: scale(1.06) translate3d(-1.2%, -1%, 0);
+  }
+}
+
+/* Blades meet at the halfway point and open again. */
+@keyframes snip-top {
+  0%,
+  100% {
+    transform: rotate(-8deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes snip-bottom {
+  0%,
+  100% {
+    transform: rotate(8deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes hair-fall {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.85;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate(-16px, 236px) rotate(160deg);
+    opacity: 0;
+  }
+}
+
+/* Same specificity as the rules above, so this wins by coming later. */
+@media (prefers-reduced-motion: reduce) {
+  .drifting .scene.active {
+    .snip-blade-top,
+    .snip-blade-bottom,
+    .clipping {
+      animation: none;
+    }
   }
 }

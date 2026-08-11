@@ -591,17 +591,42 @@
       </g>
     </g>
 
+    <!-- Scissors, held to the client's head. Drawn before the barber so his hand
+         covers the handles, and after the chair so the blades sit over the hair.
+         Kept in scene coordinates, not the barber's, so the blades can pivot
+         about a fixed point in CSS. -->
+    <g class="snip">
+      <g class="snip-blade snip-blade-top">
+        <rect x="792" y="424" width="58" height="7" rx="3.5" fill="#e3e8ee" />
+        <rect x="850" y="419" width="28" height="7" rx="3.5" fill="#9aa2ae" />
+        <circle cx="886" cy="412" r="10" fill="none" stroke="#9aa2ae" stroke-width="5" />
+      </g>
+      <g class="snip-blade snip-blade-bottom">
+        <rect x="792" y="432" width="58" height="7" rx="3.5" fill="#cdd4dd" />
+        <rect x="850" y="437" width="28" height="7" rx="3.5" fill="#9aa2ae" />
+        <circle cx="886" cy="450" r="10" fill="none" stroke="#9aa2ae" stroke-width="5" />
+      </g>
+      <circle cx="848" cy="431" r="5" fill="#6f7683" />
+    </g>
+
     <!-- Barber at work -->
     <g transform="translate(1010 470)">
       <circle cx="0" cy="0" r="32" fill="#2f1d12" />
       <path d="M-34 34h68l18 190h-104z" fill="#f2f0e6" />
-      <path d="M-40 60l-58 44 14 22 62-40z" fill="#f2f0e6" />
-      <path d="M-96 100l-40 24 12 20 42-24z" fill="#dcb08a" />
+      <!-- Arm raised to the head, so the scissors read as being wielded -->
+      <path d="M-24 35 L-98 -5 L-110 17 L-36 57 Z" fill="#f2f0e6" />
+      <path d="M-97 -3 L-145 -39 L-159 -21 L-111 15 Z" fill="#dcb08a" />
+      <circle cx="-152" cy="-30" r="12" fill="#dcb08a" />
       <rect x="-30" y="224" width="26" height="130" fill="#2f3b52" />
       <rect x="6" y="224" width="26" height="130" fill="#2f3b52" />
-      <g fill="#cfd4da">
-        <rect x="-150" y="112" width="42" height="12" rx="6" transform="rotate(-18 -150 112)" />
-      </g>
+    </g>
+
+    <!-- Cut hair on its way to the floor -->
+    <g fill="#2b1d14">
+      <path class="clipping clipping-1" d="M782 438c5 1 9 5 8 9-4-1-8-5-8-9z" />
+      <path class="clipping clipping-2" d="M802 430c5 1 9 5 8 9-4-1-8-5-8-9z" />
+      <path class="clipping clipping-3" d="M768 446c5 1 9 5 8 9-4-1-8-5-8-9z" />
+      <path class="clipping clipping-4" d="M814 442c5 1 9 5 8 9-4-1-8-5-8-9z" />
     </g>
 
     <!-- Barber pole -->
