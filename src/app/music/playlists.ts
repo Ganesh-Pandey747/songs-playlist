@@ -18,7 +18,7 @@
 
 import { cleanTitle } from './clean-title';
 
-export type PlaylistId = 'safar' | 'bus-drive' | 'saloon' | 'emraan' | 'awarapan';
+export type PlaylistId = 'safar' | 'bus-drive' | 'saloon' | 'emraan' | 'awarapan' | 'rohan';
 
 export interface Track {
   /** YouTube video id, or a local id for audio tracks. */
@@ -64,6 +64,9 @@ export const AWARAPAN_PLAYLIST_ID = 'PLHuHXHyLu7BGiVIV7r3FC5s7ZZB7hG7_O';
 
 /** The "Best of Emraan Hashmi" compilation the Emraan section was built from. */
 export const EMRAAN_SOURCE_URL = 'https://music.youtube.com/watch?v=7AWIrVanz0w';
+
+/** The KK jukebox the Rohan section plays, whole and unsplit. */
+export const ROHAN_SOURCE_URL = 'https://music.youtube.com/watch?v=r0c1f6XxRQg';
 
 /** "Banger songs play in bus" — 50 tracks. */
 const SAFAR_SNAPSHOT: readonly SnapshotRow[] = [
@@ -1297,6 +1300,22 @@ const AWARAPAN_SNAPSHOT: readonly SnapshotRow[] = [
   ],
 ];
 
+/**
+ * The KK jukebox at `ROHAN_SOURCE_URL` as one track.
+ *
+ * Unlike the Emraan section, this is deliberately not split into its 15 listed
+ * songs: the whole hour-long upload is the track. So there is nothing to skip
+ * to, and ad-free mode has no per-song title to match against Apple's
+ * catalogue — it will find at most the first song, if anything.
+ */
+const ROHAN_SNAPSHOT: readonly SnapshotRow[] = [
+  [
+    'r0c1f6XxRQg',
+    'Evergreen Hits of KK (Audio Jukebox) | Remembering the Golden Voice | T Series - Bhushan Kumar',
+    'T-Series',
+  ],
+];
+
 export const PLAYLISTS: readonly Playlist[] = [
   {
     id: 'safar',
@@ -1345,6 +1364,14 @@ export const PLAYLISTS: readonly Playlist[] = [
       playlistId: AWARAPAN_PLAYLIST_ID,
       tracks: toTracks(AWARAPAN_SNAPSHOT),
     },
+  },
+  {
+    id: 'rohan',
+    name: 'Rohan',
+    wordmark: 'रोहन',
+    // One video, so the badge points at the video itself.
+    youTubeUrl: ROHAN_SOURCE_URL,
+    source: { kind: 'youtube', tracks: toTracks(ROHAN_SNAPSHOT) },
   },
 ];
 
