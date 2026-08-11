@@ -624,11 +624,11 @@
     </g>
   </svg>
 
-  <!-- ====================== EMRAAN — a rain-slicked city at night ====================== -->
-  <!-- Awarapan and Rohan share it: same after-dark mood, and no scene of their own. -->
+  <!-- ============ NIGHT STREET — a rain-slicked city, shared by name ============ -->
+  <!-- Emraan, Awarapan and Rohan all use it, so its wordmark comes from the catalogue. -->
   <svg
     class="scene"
-    [class.active]="scene() === 'emraan' || scene() === 'awarapan' || scene() === 'rohan'"
+    [class.active]="isNightScene()"
     viewBox="0 0 1600 900"
     preserveAspectRatio="xMidYMid slice"
     role="img"
@@ -671,7 +671,7 @@
       font-weight="700"
       opacity="0.92"
     >
-      इमरान
+      {{ nightWordmark() }}
     </text>
 
     <!-- Far skyline -->
